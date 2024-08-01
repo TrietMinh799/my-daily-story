@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation';
 
 export default function Add() {
     const supabase = createClient()
-    const [authentication, setAuthentication] = useState({})
+    const [authentication, setAuthentication]: any = useState({})
     const [content, setContent] = useState("")
     const [title, setTitle] = useState("")
     const router = useRouter()
