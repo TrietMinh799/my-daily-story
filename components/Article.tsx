@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function Article({ id, title }) {
+export default function Article({ id, title }: any) {
     return (
         <div className="card bg-base-100 w-96 shadow-xl">
             <div className="card-body">
