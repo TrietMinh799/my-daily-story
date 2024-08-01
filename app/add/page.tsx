@@ -6,6 +6,8 @@ import { createClient } from '@/utils/supabase/client';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+
+
 export default function Add() {
     const supabase = createClient()
     const [authentication, setAuthentication] = useState({})
@@ -16,7 +18,7 @@ export default function Add() {
     async function _getUser() {
         const { data: { user } } = await supabase.auth.getUser()
 
-        setAuthentication(user)
+        setAuthentication(user!)
     }
 
     useEffect(() => {
