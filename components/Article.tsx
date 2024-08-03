@@ -1,6 +1,10 @@
+"use client"
+
 import Link from "next/link";
+import ShareButton from "./ShareButton";
 
 export default function Article({ id, title }: any) {
+
     return (
         <div className="card bg-base-100 w-96 shadow-xl">
             <div className="card-body">
@@ -13,9 +17,9 @@ export default function Article({ id, title }: any) {
                             viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
                                 d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </Link>
@@ -23,6 +27,7 @@ export default function Article({ id, title }: any) {
                 <Link href={`/blog/${id}`}>
                     <h1>{title}</h1>
                 </Link>
+                <ShareButton id={id} />
             </div>
         </div>
     )
