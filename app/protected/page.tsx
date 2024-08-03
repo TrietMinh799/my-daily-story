@@ -32,7 +32,7 @@ export default async function ProtectedPage() {
         <main className="flex-1 flex flex-col gap-6">
           {data && data.map((post, index) => {
             return (
-              <Article title={post.title} id={post.id} key={index} />
+              <Article user_id={user.id} title={post.title} id={post.id} key={index} />
             )
           })}
         </main>

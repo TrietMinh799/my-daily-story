@@ -31,7 +31,7 @@ export default function Index() {
         <main className="flex-1 flex flex-col gap-6">
           {_data && _data.map((post: any, index) => {
             return (
-              <Article title={post.title} id={post.id} key={index} />
+              <Article user_id="undefined" title={post.title} id={post.id} key={index} />
             )
           })}
         </main>
