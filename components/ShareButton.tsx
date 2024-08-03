@@ -1,9 +1,16 @@
 import { Description, Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
-import { useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 
 export default function ShareButton({ id }: { id: number }) {
     const [isOpen, setIsOpen] = useState(false)
-    const url = window.location.href + `blog/${id}`
+    const [url, setUrl] = useState("")
+
+    useLayoutEffect(() => {
+        const _url = window.location.href + `blog/${id}`
+
+        setUrl(_url)
+    }, [id])
+
 
     return (
         <>
@@ -17,9 +24,9 @@ export default function ShareButton({ id }: { id: number }) {
                 open={isOpen}
                 onClose={() => setIsOpen(false)}
                 transition
-                className="fixed inset-0 flex w-screen items-center justify-center bg-black/30 p-4 transition duration-300 ease-out data-[closed]:opacity-0"
+                className="fixed inset-0 flex w-screen border items-center justify-center bg-black/30 p-4 transition duration-300 ease-out data-[closed]:opacity-0"
             >
-                <DialogPanel className="max-w-lg space-y-4 bg-white p-12">
+                <DialogPanel className="max-w-lg space-y-4 border rounded-md bg-gray-500 p-12">
                     <DialogTitle className="font-bold">Sharing your story!</DialogTitle>
                     <Description>Currently support copy the url link.</Description>
                     <p>{url}</p>
