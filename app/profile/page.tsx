@@ -1,10 +1,8 @@
 import { createClient } from "@/utils/supabase/server"
 import { redirect } from "next/navigation"
 
-
-const supabase = createClient()
 export default async function Profile() {
-
+    const supabase = createClient()
     const { data: { user } } = await supabase.auth.getUser()
 
     if (!user) {
