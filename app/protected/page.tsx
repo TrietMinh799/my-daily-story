@@ -4,9 +4,9 @@ import { redirect } from "next/navigation";
 import AddButton from "@/components/AddButton";
 import Article from "@/components/Article";
 
-const supabase = createClient();
-
 export default async function ProtectedPage() {
+  const supabase = createClient();
+
   const {
     data: { user },
   } = await supabase.auth.getUser();
