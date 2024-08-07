@@ -1,7 +1,19 @@
 import { createClient } from "@/utils/supabase/server"
+import { generateHTML } from "@tiptap/html"
+import StarterKit from "@tiptap/starter-kit"
 import Link from "next/link"
-import Markdown from "react-markdown"
-import remarkGfm from "remark-gfm"
+import { JSONContent } from "novel"
+import Links from '@tiptap/extension-link'
+import DOMPurify from "isomorphic-dompurify";
+
+const _ = {
+    "type": "doc",
+    "content": [
+        {
+            "type": "paragraph",
+            "content": [{ "type": "text", "text": "Tài công Châu Trọng Lực cho biết khi nhìn thấy tàu hàng đến gần anh đã kéo hết ga đề lùi phà nhưng do trớn tàu chạy và nước chảy mạnh nên không tránh được." }]
+        }, { "type": "paragraph", "content": [{ "type": "text", "text": "\"Lúc đó tàu đã đến quá gần nên tôi không thể bẻ lái quay đầu bởi lực chảy của nước và sức hút của tàu siêu trường sẽ làm phà chìm\", tài công Châu Trọng Lực, 39 tuổi, người cầm lái phà khách bị tàu chở dầu quốc tịch Thái Lan, trọng tải hơn 4.500 tấn " }, { "type": "text", "marks": [{ "type": "link", "attrs": { "href": "https://vnexpress.net/tau-hang-dam-pha-cho-khach-tren-song-vam-nao-4778468.html", "target": "_blank", "rel": "dofollow", "class": "text-muted-foreground underline underline-offset-[3px] hover:text-primary transition-colors cursor-pointer" } }], "text": "đâm" }, { "type": "text", "text": " trên sông Vàm Nao chiều 6/8, kể." }] }, { "type": "paragraph", "content": [{ "type": "text", "text": "Anh Lực cho biết bản thân có kinh nghiệm hàng chục năm lái phà và có chứng chỉ lái tàu hạng 3 (phà chở đến 50 khách và đến 250 tấn hàng hóa). Hôm qua, như mọi ngày, anh chở 10 hành khách cùng hai ôtô, 6 xe máy và một xe ba gác từ huyện Phú Tân sang huyện Chợ Mới theo dòng nước ngược. Thời điểm trước khi xảy ra tai nạn, trời chuyển mây đen, sắp mưa song không có sương mù." }] }]
+}
 
 export default async function Index({ params }: { params: { slug: string } }) {
 
@@ -9,6 +21,7 @@ export default async function Index({ params }: { params: { slug: string } }) {
 
     const { data, error } = await supabase.from('posts').select('*').filter("id", "eq", params.slug).single()
     const { data: { user } } = await supabase.auth.getUser()
+    const content: JSONContent = data.content;
 
     return (
         <div className="artboard phone-3 m-12 self-center">
@@ -20,7 +33,7 @@ export default async function Index({ params }: { params: { slug: string } }) {
                     </path>
                 </svg></Link>
             <h1 className="font-bold">{data.title}</h1>
-            <Markdown remarkPlugins={[remarkGfm]}>{data.content}</Markdown>
+            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(generateHTML(_, [StarterKit, Links])) }} />
         </div>
     )
 }

@@ -2,13 +2,15 @@
 
 import { createClient } from '@/utils/supabase/client';
 import { useEffect, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
-import Editor from '@/components/Editor';
+import { useRouter } from 'next/navigation';
+import Editor from '@/components/editor/advanced-editor';
+import { JSONContent } from 'novel';
+import "../prosemirror.css";
 
 export default function Add() {
     const supabase = createClient()
     const [authentication, setAuthentication]: any = useState({})
-    const [content, setContent] = useState("")
+    const [content, setContent] = useState<JSONContent>()
     const [title, setTitle] = useState("")
     const [msg, setMsg] = useState("")
     const router = useRouter()
@@ -29,9 +31,6 @@ export default function Add() {
         if (title.length == 0)
             router.push("/add?message=Please set the title name")
 
-        if (content)
-            console.log(JSON.parse(content))
-
         const { data } = await supabase.from('posts').insert({
             title, content, user_id: authentication.id, user_email: authentication.email
         }).select().single()
@@ -51,7 +50,7 @@ export default function Add() {
                 type="text"
                 placeholder="Story name"
                 className="input input-bordered w-full max-w-xs" />
-            <Editor />
+            <Editor onChange={setContent} />
         </div>
     )
 }
