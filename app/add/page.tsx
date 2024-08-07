@@ -12,7 +12,6 @@ export default function Add() {
     const [title, setTitle] = useState("")
     const [msg, setMsg] = useState("")
     const router = useRouter()
-    const params = useSearchParams()
 
     async function _getUser() {
         const { data: { user } } = await supabase.auth.getUser()
@@ -23,11 +22,6 @@ export default function Add() {
     useEffect(() => {
         _getUser()
 
-        setMsg(params.get("message")!)
-        const savedThemes = window.localStorage.getItem("theme")
-        if (savedThemes) {
-            document.documentElement.setAttribute("data-theme", savedThemes)
-        }
     }, [])
 
     async function handleClick() {
