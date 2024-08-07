@@ -4,14 +4,15 @@ import { redirect } from "next/navigation";
 import AddButton from "@/components/AddButton";
 import Article from "@/components/Article";
 
-export default async function ProtectedPage() {
-  const supabase = createClient();
+const supabase = createClient();
 
+export default async function ProtectedPage() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
   const { data } = await supabase.from("posts").select("*")
+
 
   if (!user) {
     return redirect("/login");

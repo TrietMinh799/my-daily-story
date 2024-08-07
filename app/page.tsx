@@ -8,6 +8,7 @@ export default function Index() {
 
   const supabase = createClient()
   const [_data, _setData] = useState([{}])
+  const [theme, setTheme] = useState("winter")
 
   async function getData() {
     const { data, error } = await supabase.from("posts").select("*")
@@ -18,6 +19,14 @@ export default function Index() {
   useEffect(() => {
     getData()
   }, [])
+
+  useEffect(() => {
+    const savedThemes = window.localStorage.getItem("theme")
+    if (savedThemes) {
+      document.documentElement.setAttribute("data-theme", savedThemes)
+      setTheme(savedThemes)
+    }
+  }, [theme])
 
   return (
     <div className="flex-1 w-full flex flex-col gap-20 items-center">
@@ -36,7 +45,6 @@ export default function Index() {
           })}
         </main>
       </div>
-
     </div>
   );
 }
