@@ -1,9 +1,10 @@
 "use client"
 import Article from "@/components/Article";
 import { createClient } from "@/utils/supabase/client";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
 import { LogIn } from "lucide-react";
+import Skeleton from "@/components/Skeleton";
 
 export default function Index() {
 
@@ -21,14 +22,6 @@ export default function Index() {
     getData()
   }, [])
 
-  useEffect(() => {
-    const savedThemes = window.localStorage.getItem("theme")
-    if (savedThemes) {
-      document.documentElement.setAttribute("data-theme", savedThemes)
-      setTheme(savedThemes)
-    }
-  }, [theme])
-
   return (
     <div className="flex-1 w-full flex flex-col gap-20 items-center">
       <nav className="w-full flex justify-center border-b border-b-black h-16">
@@ -43,7 +36,9 @@ export default function Index() {
         <main className="flex-1 flex flex-col gap-6">
           {_data && _data.map((post: any, index) => {
             return (
-              <Article user_id="undefined" title={post.title} id={post.id} key={index} />
+              <Suspense key={index} fallback={<Skeleton />}>
+                <Article user_id="undefined" title={post.title} id={post.id} content={post.content} />
+              </Suspense>
             )
           })}
         </main>
