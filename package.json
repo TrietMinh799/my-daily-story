@@ -13,6 +13,7 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@supabase/ssr": "latest",
     "@tailwindcss/typography": "^0.5.10",
+    "@tiptap/extension-image": "^2.5.9",
     "@tiptap/extension-link": "^2.5.9",
     "@tiptap/html": "^2.5.9",
     "@tiptap/pm": "^2.5.9",

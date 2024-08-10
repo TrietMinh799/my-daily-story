@@ -10,7 +10,6 @@ export default function Index() {
 
   const supabase = createClient()
   const [_data, _setData] = useState([{}])
-  const [theme, setTheme] = useState("winter")
 
   async function getData() {
     const { data, error } = await supabase.from("posts").select("*")

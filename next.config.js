@@ -11,9 +11,14 @@ const nextConfig = {
             {
                 protocol: 'https',
                 hostname: 'images.stockcake.com'
-            }, {
+            },
+            {
                 protocol: 'https',
                 hostname: "images.unsplash.com"
+            },
+            {
+                protocol: 'https',
+                hostname: 'picsum.photos'
             }
         ]
     }
