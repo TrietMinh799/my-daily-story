@@ -23,7 +23,7 @@ export default function Index() {
   }, [])
 
   return (
-    <div className="flex-1 w-full flex flex-col gap-20 items-center">
+    <div className="flex-1 w-full flex flex-col gap-32 items-center">
       <nav className="w-full flex justify-center border-b border-b-black h-16">
         <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm">
           <Link className="btn btn-active btn-neutral" href="/login">
@@ -32,12 +32,14 @@ export default function Index() {
         </div>
       </nav>
 
-      <div className="flex-1 flex flex-col gap-20 max-w-4xl px-3">
-        <main className="flex-1 flex flex-col gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <main className="">
           {_data && _data.map((post: any, index) => {
             return (
               <Suspense key={index} fallback={<Skeleton />}>
-                <Article user_id="undefined" title={post.title} id={post.id} content={post.content} />
+                <div className="m-4">
+                  <Article user_id="undefined" title={post.title} id={post.id} content={post.content} />
+                </div>
               </Suspense>
             )
           })}
