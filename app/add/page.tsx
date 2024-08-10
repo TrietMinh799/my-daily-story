@@ -40,17 +40,20 @@ export default function Add() {
 
     if (!authentication) {
         router.push('/')
-    } return (
+    }
+    return (
         <div className='m-4'>
-            <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg" onClick={handleClick}>Add a new story</button>
-            <input
-                onChange={(e) => {
-                    setTitle(e.target.value)
-                }}
-                type="text"
-                placeholder="Story name"
-                className="input input-bordered w-full max-w-xs" />
-            <Editor onChange={setContent} />
-        </div>
+            <form action="#">
+                <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg" onClick={handleClick}>Add a new story</button>
+                <input
+                    onChange={(e) => {
+                        setTitle(e.target.value)
+                    }}
+                    type="text"
+                    placeholder="Story name"
+                    className="input input-bordered w-full max-w-xs"
+                    required />
+                <Editor onChange={setContent} />
+            </form>  </div>
     )
 }
