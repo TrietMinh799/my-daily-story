@@ -5,6 +5,7 @@ import ShareButton from "./ShareButton";
 import { useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 import { User } from "@supabase/supabase-js";
+import Image from "next/image";
 
 export default function Article({ user_id, id, title }: any) {
 
@@ -22,6 +23,11 @@ export default function Article({ user_id, id, title }: any) {
 
     }
 
+    function randomIntFromInterval(min: number, max: number) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
+
     useEffect(() => {
         try {
             getAuthenticated()
@@ -34,6 +40,7 @@ export default function Article({ user_id, id, title }: any) {
         <div className="card bg-base-100 w-96 shadow-xl">
             <div className="card-body">
                 <div className="card-actions justify-end">
+                    <Image width={1500} height={700} src={`https://picsum.photos/1200/500?img=${randomIntFromInterval(1, 10000)}`} alt={"Article image"} />
                     {_user?.id == user_id &&
                         <button onClick={() => {
                             deleteArticle();
