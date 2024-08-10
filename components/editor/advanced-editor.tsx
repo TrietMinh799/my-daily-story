@@ -36,7 +36,9 @@ const Editor = ({ initialValue, onChange }: EditorProp) => {
   return (
     <EditorRoot>
       <EditorContent
-        className="border p-4 rounded-xl"
+        immediatelyRender={false}
+        className="border p-4 h-auto rounded-xl"
+        parseOptions={{ preserveWhitespace: true }}
         {...(initialValue && { initialContent: initialValue })}
         extensions={extensions}
         editorProps={{

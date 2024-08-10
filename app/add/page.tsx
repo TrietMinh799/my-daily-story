@@ -54,6 +54,7 @@ export default function Add() {
                     className="input input-bordered w-full max-w-xs"
                     required />
                 <Editor onChange={setContent} />
-            </form>  </div>
+            </form>
+        </div>
     )
 }
