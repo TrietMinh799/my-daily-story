@@ -2,6 +2,8 @@ import { GeistSans } from "geist/font/sans";
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Analytics } from '@vercel/analytics/next'
 import "./globals.css";
+import '@radix-ui/themes/styles.css';
+import { Theme } from "@radix-ui/themes";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -22,9 +24,11 @@ export default function RootLayout({
     <html lang="en" className={GeistSans.className}>
       <body className="bg-background text-foreground">
         <main className="min-h-screen flex flex-col">
-          {children}
-          <SpeedInsights />
-          <Analytics />
+          <Theme appearance="dark">
+            {children}
+            <SpeedInsights />
+            <Analytics />
+          </Theme>
         </main>
       </body>
     </html >
