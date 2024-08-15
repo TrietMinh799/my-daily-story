@@ -46,7 +46,7 @@ export default function Article({ user_id, id, title, content }: any) {
     }, [])
 
     return (
-        <Box maxWidth="300px" m="9">
+        <Box maxWidth="400px" ml="120px" mt="9">
             <Card size="3">
                 <Inset clip="padding-box" side="top" pb="current">
                     <Link href={`/blog/${id}`}>

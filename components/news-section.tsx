@@ -5,7 +5,7 @@ import Skeleton from "./Skeleton"
 
 export default function News({ data }: { data: any }) {
     return (
-        <Grid columns="3" gap="3" rows="repeat(3, 128px)" width="auto">
+        <Grid columns="3" gap="3" justify="center" width="auto">
             {data && data.map((post: any, index: Key | null | undefined) => {
                 return (
                     <Suspense key={index} fallback={<Skeleton />}>
