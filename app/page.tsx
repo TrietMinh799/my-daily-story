@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import Main from "@/components/main";
 import News from "@/components/news-section";
 import { createClient } from "@/utils/supabase/server";
@@ -19,6 +20,7 @@ export default async function Index() {
       <Main>
         <News data={data} />
       </Main>
+      <Footer />
     </div>
   );
 }

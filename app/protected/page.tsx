@@ -2,6 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import Main from "@/components/main";
 import News from "@/components/news-section";
+import Footer from "@/components/Footer";
 
 export default async function ProtectedPage() {
   const supabase = createClient();
@@ -22,6 +23,7 @@ export default async function ProtectedPage() {
       <Main>
         <News data={data} />
       </Main>
+      <Footer />
     </div>
   );
 }
