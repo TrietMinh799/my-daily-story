@@ -1,4 +1,5 @@
 import { Text } from "@radix-ui/themes";
+import Link from "next/link";
 
 export default function Footer() {
     return (
@@ -8,7 +9,7 @@ export default function Footer() {
                 </span>
                 <ul className="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
                     <li>
-                        <p className="hover:underline">Contact: <Text>trietnhamminh@gmail.com</Text></p>
+                        <Link href="mailto:trietnhamminh598@gmail.com" className="hover:underline">Contact: trietnhamminh598@gmail.com</Link>
                     </li>
                 </ul>
             </div>
