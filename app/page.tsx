@@ -18,7 +18,7 @@ export default async function Index() {
   return (
     <div>
       <Main>
-        <News data={data} />
+        <News data={data} length={data?.length!} />
       </Main>
       <Footer />
     </div>

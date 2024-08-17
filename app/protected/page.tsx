@@ -21,7 +21,7 @@ export default async function ProtectedPage() {
   return (
     <div>
       <Main>
-        <News data={data} />
+        <News data={data} length={data?.length!} />
       </Main>
       <Footer />
     </div>
