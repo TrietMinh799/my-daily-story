@@ -10,13 +10,15 @@ import DOMPurify from "isomorphic-dompurify";
 import Image from "@tiptap/extension-image"
 import { useEffect, useState } from "react"
 import ScrollToTopButton from "@/components/ScrollToTopButton"
-import { Heading, Text } from "@radix-ui/themes"
+import { Container, Heading, Text } from "@radix-ui/themes"
 import { ArrowLeftToLine } from "lucide-react"
+import Footer from "@/components/Footer"
 
 export default function Index({ params }: { params: { slug: string } }) {
 
     const [title, setTitle] = useState<any>()
     const [content, setContent] = useState<JSONContent>({})
+    const [date, setDate] = useState<string>()
     const [_user, _setUser] = useState<any>()
     const supabase = createClient()
     const [loading, setLoading] = useState(false)
@@ -32,6 +34,8 @@ export default function Index({ params }: { params: { slug: string } }) {
             const { data, error } = await supabase.from('posts').select('*').filter("id", "eq", params.slug).single()
             setContent((_: any) => (JSON.parse(data.content)));
             setTitle(data.title)
+            const now = new Date(data.inserted_at).toDateString()
+            setDate(now)
             setLoading(true)
         }
         getData()
@@ -53,19 +57,23 @@ export default function Index({ params }: { params: { slug: string } }) {
 
 
     return (
-        <main className="pt-8 pb-16 lg:pt-16 lg:pb-24  antialiased">
-            <div className="flex justify-between px-4 mx-auto max-w-screen-xl">
-                <article className="mx-auto w-full max-w-2xl">
-                    <Link href={(_user ? "/protected" : "/")}>
-                        <ArrowLeftToLine />
-                    </Link>
-                    <Heading align="center" size="8">{title}</Heading>
-                    <Text>
-                        <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(generateHTML(content, [StarterKit, Links, Image])) }} />
-                    </Text>
-                </article>
-            </div>
-            <ScrollToTopButton />
-        </main>
+        <Container>
+            <main className="pt-8 lg:pt-16 antialiased">
+                <div className="flex justify-between px-4 mx-auto max-w-screen-xl">
+                    <article className="mx-auto w-full max-w-2xl">
+                        <Link href={(_user ? "/protected" : "/")}>
+                            <ArrowLeftToLine />
+                        </Link>
+                        <Heading align="center" size="8">{title}</Heading>
+                        Created: <Heading as="h5"> {date}</Heading>
+                        <Text as="span">
+                            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(generateHTML(content, [StarterKit, Links, Image])) }} />
+                        </Text>
+                    </article>
+                </div>
+                <ScrollToTopButton />
+                <Footer />
+            </main>
+        </Container>
     )
 }
