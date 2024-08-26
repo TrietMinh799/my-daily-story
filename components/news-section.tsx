@@ -19,8 +19,8 @@ export default function News({ data, length }: { data: any, length: number }) {
     const _data = paginate(data, currentPage, pageSize)
 
     return (
-        <Section>
-            <Grid columns="3" gap="3" justify="center" width="auto">
+        <Section className="ml-48">
+            <Grid columns="2" gap="2" justify="center" width="auto">
                 {_data && _data.map((post: any, index: Key | null | undefined) => {
                     return (
                         <Suspense key={index} fallback={<Skeleton />}>
@@ -29,7 +29,7 @@ export default function News({ data, length }: { data: any, length: number }) {
                     )
                 })}
             </Grid>
-            <Container p="8">
+            <Container ml="9">
                 <Pagination size={length} currentPage={currentPage} pageSize={pageSize} onPageChange={onPageChange} />
             </Container>
         </Section>
