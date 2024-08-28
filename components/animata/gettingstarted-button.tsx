@@ -13,7 +13,7 @@ export default function GetStartedButton({
   text = "Get started",
   path,
   className,
-}: IGetStartedButtonProps) {
+}: Readonly<IGetStartedButtonProps>) {
   return (
     <div className="min-h-12 w-48">
       <Link href={path}>

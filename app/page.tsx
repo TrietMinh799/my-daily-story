@@ -8,7 +8,7 @@ export default async function Index() {
 
   const supabase = createClient()
 
-  const { data, error } = await supabase.from('posts').select('*')
+  const { data } = await supabase.from('posts').select('*')
   const { data: { user } } = await supabase.auth.getUser();
 
   if (user) {

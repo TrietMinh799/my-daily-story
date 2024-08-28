@@ -1,13 +1,10 @@
 "use client"
 
 import Link from "next/link";
-import ShareButton from "./ShareButton";
-import { generateHTML } from '@tiptap/core'
 import { useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 import { User } from "@supabase/supabase-js";
 import Image from "next/image";
-import StarterKit from "@tiptap/starter-kit";
 import { Box, Card, Heading, Inset } from "@radix-ui/themes";
 import GetStartedButton from "./animata/gettingstarted-button";
 import AnimatedBorderTrail from "./animata/AnimatedBorderTrail";
@@ -15,12 +12,12 @@ import AnimatedBorderTrail from "./animata/AnimatedBorderTrail";
 export default function Article({ user_id, id, title, content }: any) {
 
     const supabase = createClient()
-    const [_user, _setUser] = useState<User>()
+    const [user, setUser] = useState<User>()
 
     async function getAuthenticated() {
-        const { data: { user }, error } = await supabase.auth.getUser()
+        const { data: { user: _ } } = await supabase.auth.getUser()
 
-        _setUser(user!)
+        setUser(_!)
     }
 
     async function deleteArticle() {
@@ -40,11 +37,7 @@ export default function Article({ user_id, id, title, content }: any) {
     }
 
     useEffect(() => {
-        try {
-            getAuthenticated()
-        } catch (error) {
-            console.error(error)
-        }
+        getAuthenticated().catch(e => console.error(e))
     }, [])
 
     return (
