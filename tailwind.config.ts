@@ -1,3 +1,5 @@
+const { blackA, violet } = require('@radix-ui/colors');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -17,6 +19,10 @@ module.exports = {
       },
       animation: {
         "trail": "trail var(--duration) linear infinite",
+      },
+      colors: {
+        ...blackA,
+        ...violet,
       },
     }
   }
